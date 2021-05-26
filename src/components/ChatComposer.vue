@@ -1,35 +1,35 @@
 <template>
   <div id="chat-message-container">
-    <!-- <div id="chat-message" data-ph="Type a message" contentEditable="true" v-on:change="onChange">{{chatMessage}}</div> -->
-    <textarea id="chat-message" placeholder="Type a message" v-on:keyup="resizeTextarea" @change="onChange" :value="chatMessage" />
-    <font-awesome-icon icon="paper-plane" size="2x" v-on:click="$emit('get-message')" />
+    <textarea id="chat-message" ref="textarea" placeholder="Type a message" v-on:keyup="resizeTextarea" @input="onChange" :value="message" />
+    <font-awesome-icon icon="paper-plane" size="2x" v-on:click="onClick" />
   </div>
 </template>
 
 <script>
 export default {
   name: "ChatComposer",
-  data() {
-    return {
-      msg: ''
-      }
-    },
-  methods: {
-    onChange (e) {
-      this.$emit('updateMessage', e.target.value)
-    },
-    alert(msg) {
-      alert(msg)
-    },
-    resizeTextarea(e) {
-      // console.log(e.target)
-      e.target.style.height = "1px";
-      e.target.style.height = (e.target.scrollHeight)+"px";
-    }
-
-  },
-  props: ['chatMessage'],
   
+  methods: {
+    onClick() {
+      this.$emit('get-message');
+      // The line below resets the height of the textarea which has been modified to expand based on content
+      this.$refs.textarea.style.height = "2.5rem";
+    },
+    onChange (e) {
+      // This is for training purposes only, there is no need to emit to parent. All can be handle here..
+      this.$store.commit('changeMessage',e.target.value)
+      console.log(this.$store.state.message)
+    },
+    resizeTextarea() {
+      this.$refs.textarea.style.height = "1px";
+      this.$refs.textarea.style.height = (this.$refs.textarea.scrollHeight)+"px";
+    }
+  },
+  computed: {
+    message() {
+      return this.$store.state.message
+    }
+  }
 };
   
 </script>
@@ -47,7 +47,6 @@ This is for the div version to simulate textarea behaviour
   padding: 1rem 2rem;
   order: 3;
   position: relative;
-  min-height: 60px;
   border: 1px solid #dee2e6;
 }
 
