@@ -16,6 +16,7 @@ export default {
     },
   methods: {
     onChange (e) {
+      // This is for training purposes only, there is no need to emit to parent. All can be handle here..
       this.$emit('updateMessage', e.target.value)
     },
     alert(msg) {
