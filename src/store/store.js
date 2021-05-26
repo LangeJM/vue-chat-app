@@ -5,7 +5,8 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    message: ""
+    message: "",
+    user: {}
   },
   getters: {
     modifiedMessage: state => {
@@ -15,6 +16,9 @@ export const store = new Vuex.Store({
   mutations: {
     changeMessage: (state, payload) => {
       return (state.message = payload);
+    },
+    setActiveUser: (state, payload) => {
+      return (state.user = payload);
     }
   }
 });
