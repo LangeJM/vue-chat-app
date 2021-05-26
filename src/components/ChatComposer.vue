@@ -1,8 +1,8 @@
 <template>
   <div id="chat-message-container">
-    <!-- <textarea id="chat-message" v-model="msg" placeholder="Type a message" ></textarea> -->
-    <div id="chat-message" data-ph="Type a message" contentEditable="true" >{{msg}}</div>
-    <font-awesome-icon icon="paper-plane" size="2x" class="" />
+    <!-- <div id="chat-message" data-ph="Type a message" contentEditable="true" v-on:change="onChange">{{chatMessage}}</div> -->
+    <textarea id="chat-message" placeholder="Type a message" @change="onChange" :value="chatMessage" />
+    <font-awesome-icon icon="paper-plane" size="2x" v-on:click="$emit('get-message')" />
   </div>
 </template>
 
@@ -13,13 +13,26 @@ export default {
     return {
       msg: ''
       }
+    },
+  methods: {
+    onChange (e) {
+      this.$emit('updateMessage', e.target.value)
+      
+    },
+    alert(msg) {
+      alert(msg)
     }
+  },
+  props: ['chatMessage'],
   
 };
   
 </script>
 <style lang="scss">
-[contentEditable=true]:empty:not(:focus):before{content:attr(data-ph)}
+/*
+[contentEditable=true]:empty:not(:focus):before{content:attr(data-ph)} 
+This is for the div version to simulate textarea behaviour 
+*/
 #chat-message-container {
   min-height: 60px;
   background-color: #f8f9fa;
@@ -40,6 +53,4 @@ export default {
   border-radius: 1rem;
   background-color: white;     
 }
-
-
 </style>

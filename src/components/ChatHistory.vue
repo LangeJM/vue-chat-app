@@ -29,7 +29,7 @@ export default {
 <style scoped>
   #msg-container {
     overflow: auto;
-    background-color: thistle;
+    background-color: rgba(27, 65, 97, 0.479);
     height: 75%;
     flex: 1 1 0;
     position: relative;

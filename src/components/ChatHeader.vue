@@ -22,7 +22,7 @@ export default {
    background-color: #f8f9fa;
    position: relative;
    min-height: 60px;
-   z-index: 1000;
+   
  }
  h3 {
    padding: 0.5rem;

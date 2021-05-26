@@ -1,5 +1,5 @@
 {
-  "name": "01-login",
+  "name": "vue-chat-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -48,15 +48,7 @@
       "eslint:recommended"
     ],
     "rules": {
-      "no-console": [
-        "error",
-        {
-          "allow": [
-            "error",
-            "warn"
-          ]
-        }
-      ]
+      "no-console": "off"
     },
     "parserOptions": {
       "parser": "babel-eslint"

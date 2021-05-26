@@ -7,11 +7,10 @@
         <router-view />
       </div>
     </div>
-    <footer class="bg-light text-center p-3">
-      <div class="logo"></div>
+    <footer class="bg-light text-center p-3 d-flex justify-content-center align-items-center">
       <p>
-        Sample project provided by
-        <a href="https://auth0.com">Auth0</a>
+        <span>Vue</span>View App on 
+        <a href="https://github.com/LangeJM/vue-chat-app">Github</a>
       </p>
     </footer>
   </div>
@@ -28,3 +27,12 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+  span {
+    text-decoration: line-through;
+  }
+  p {
+    margin: 0
+  }
+</style>
