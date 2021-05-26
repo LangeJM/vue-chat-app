@@ -56,7 +56,6 @@ npm run test
 npm run lint
 ```
 
-
 ## License
 
 This project is licensed under the MIT license. See the [LICENSE](../LICENSE) file for more info.

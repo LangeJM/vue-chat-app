@@ -1,8 +1,8 @@
 <template>
   <div id="chat-header-style">
     <div v-if="smallerFont">
-      <div id="smaller-font01">{{headerTitle.given_name}}</div>
-      <div id="smaller-font02">{{headerTitle.email}}</div>
+      <div id="smaller-font01">{{headerTitle.given_name ? headerTitle.given_name : headerTitle.email}}</div>
+      <div id="smaller-font02">{{headerTitle.given_name ? headerTitle.email: ""}}</div>
     </div>
     <h3 v-else>{{headerTitle}}</h3>
   </div>
