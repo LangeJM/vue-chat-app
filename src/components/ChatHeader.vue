@@ -1,34 +1,49 @@
 <template>
-  <div >
-    <!-- <h3 class="p-2">Chat History</h3> -->
-    <h3 >{{headerTitle}}</h3>
+  <div id="chat-header-style">
+    <div v-if="smallerFont">
+      <div id="smaller-font01">{{headerTitle.given_name}}</div>
+      <div id="smaller-font02">{{headerTitle.email}}</div>
+    </div>
+    <h3 v-else>{{headerTitle}}</h3>
   </div>
 </template>
 
 <script>
 export default {
   name: "ChatHeader",
-  props: ["headerTitle"],
+  props: ["headerTitle", "smallerFont"],
   
   
 };
 </script>
 <style scoped>
- div {
+ #chat-header-style {
    text-align: left;
    display: flex;
    border: 1px solid #dee2e6;
    margin: 0;
    background-color: #f8f9fa;
    position: relative;
-   min-height: 60px;
+   /* height: 64px; */
+   height: 4rem;
+   padding: 0.5rem;
    
  }
- h3 {
+ h3, h5 {
    padding: 0.5rem;
    margin: 0;
    display: flex;
    align-items: center;
  }
+ #smaller-font01 {
+   color: rgba(11, 130, 194, 1);
+   font-weight: bold;
+   font-size: larger;
+ }
+ #smaller-font02 {
+   color: rgba(11, 130, 194, 1);
+   font-size: smaller;
+ }
+
   
 </style>

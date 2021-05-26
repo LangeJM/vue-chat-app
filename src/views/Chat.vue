@@ -1,7 +1,7 @@
 <template>
   <div id="chat-container">
     <div id="chat-user-container" >
-      <chat-header :header-title="$store.state.user.email"/>
+      <chat-header :header-title="$store.state.user" smaller-font="true"/>
       <chat-user-list/>
     </div>
     <div id="chat-content-container"> 
