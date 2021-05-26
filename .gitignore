@@ -10,3 +10,4 @@ selenium-debug.log
 auth0-variables.js
 .env
 auth_config.json
+package-orig.json
