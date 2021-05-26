@@ -3,6 +3,13 @@
 This is a meant as a training exercise to better familiarize myself with Vue (currently 2.6.12).
 The [auth0 sample apps](https://github.com/auth0-samples/auth0-vue-samples) were used as a starter with authentication.
 
+## Missing features and fixes
+
+- Currently the user object which is provided by Auth0 is committed to the on App.vue mount (lifecycle method) with the help of setTimeout(700). Needs to be changed to async/Promise based implementation (plus store actions I guess) or maybe can go without the store entirely.
+- No api and db implementation yet, so there is no real data and interaction (In addition and later on needs websockets, Typescript (I guess optional), maybe full test suite?).
+- Auth0 wrapper used is not 100% clear and shows unexpected behavior. Need to do more research into Auth0.
+- Lastly, this is based on a Vue2 template. Eventually this should be converted to Vue3
+
 ## Project setup
 
 Please note, this setup works with Node version 12.22.1!
