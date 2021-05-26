@@ -24,6 +24,11 @@ export default {
   components: {
     NavBar,
     Error
+  },
+  created() {
+    setTimeout(() => {
+      this.$store.commit('setActiveUser', this.$auth.user)
+    }, 700);
   }
 };
 </script>

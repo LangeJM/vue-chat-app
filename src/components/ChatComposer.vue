@@ -18,7 +18,6 @@ export default {
     onChange (e) {
       // This is for training purposes only, there is no need to emit to parent. All can be handle here..
       this.$store.commit('changeMessage',e.target.value)
-      console.log(this.$store.state.message)
     },
     resizeTextarea() {
       this.$refs.textarea.style.height = "1px";

@@ -11,11 +11,11 @@
       <div class="col-md text-center text-md-left">
         <h2>{{ $auth.user.name }}</h2>
         <p class="lead text-muted">{{ $auth.user.email }}</p>
-      </div>
-    </div>
 
-    <div class="row">
-      <highlightjs autodetect :code="JSON.stringify($auth.user, null, 2)" class="rounded w-100" />
+        <div v-for="(value, name) in $auth.user" :key="name" class="mx-3 mb-1 border-bottom">
+          {{`${name} : ${value}`}}
+        </div>
+      </div>
     </div>
   </div>
 </template>
