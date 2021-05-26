@@ -14,7 +14,6 @@
 </template>
 
 <script>
-
 import ChatUserList from "../components/ChatUserList";
 import ChatHistory from "../components/ChatHistory";
 import ChatComposer from "../components/ChatComposer";
@@ -35,8 +34,8 @@ export default {
   },
   methods: {
     alert() {
-      alert(this.message)
-      this.message = ""
+      alert(this.$store.state.message)
+      this.$store.commit('changeMessage', "")
     },
     updateMessage(msg) {
       this.message = msg

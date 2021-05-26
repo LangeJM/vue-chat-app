@@ -1,7 +1,6 @@
 <template>
   <div id="chat-message-container">
-    <!-- <div id="chat-message" data-ph="Type a message" contentEditable="true" v-on:change="onChange">{{chatMessage}}</div> -->
-    <textarea id="chat-message" ref="textarea" placeholder="Type a message" v-on:keyup="resizeTextarea" @change="onChange" :value="chatMessage" />
+    <textarea id="chat-message" ref="textarea" placeholder="Type a message" v-on:keyup="resizeTextarea" @input="onChange" :value="message" />
     <font-awesome-icon icon="paper-plane" size="2x" v-on:click="onClick" />
   </div>
 </template>
@@ -9,11 +8,7 @@
 <script>
 export default {
   name: "ChatComposer",
-  data() {
-    return {
-      msg: ''
-      }
-    },
+  
   methods: {
     onClick() {
       this.$emit('get-message');
@@ -22,18 +17,19 @@ export default {
     },
     onChange (e) {
       // This is for training purposes only, there is no need to emit to parent. All can be handle here..
-      this.$emit('updateMessage', e.target.value)
-    },
-    alert(msg) {
-      alert(msg)
+      this.$store.commit('changeMessage',e.target.value)
+      console.log(this.$store.state.message)
     },
     resizeTextarea() {
       this.$refs.textarea.style.height = "1px";
       this.$refs.textarea.style.height = (this.$refs.textarea.scrollHeight)+"px";
     }
   },
-  props: ['chatMessage'],
-  
+  computed: {
+    message() {
+      return this.$store.state.message
+    }
+  }
 };
   
 </script>
