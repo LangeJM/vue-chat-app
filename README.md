@@ -18,6 +18,8 @@ Please note, this setup works with Node version 12.22.1!
 npm install
 ```
 
+Remember that for the node/express app in the [server folder](./server), whn you install packages locally (and not globally) you need to prefix every command with `npx`. This is true for Typescript (`npx tsc server.ts`) and Nodemon (`npx nodemon server.js`).
+
 ### Configuration
 
 The project needs to be configured with your Auth0 domain and client ID in order for the authentication flow to work.
