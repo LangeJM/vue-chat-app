@@ -28,9 +28,17 @@ export const getAllConversations: RequestHandler = (req, res, next) => {
 
 export const getConversation: RequestHandler = (req, res, next) => {
   const id = (req.params as { id: string }).id;
-  const convo = CONVERSATIONS.filter((convo) => convo.id === id);
-  res.status(201).json({
-    message: `Requested conversation with id ${id}`,
-    convo,
-  });
+  const convo = CONVERSATIONS.filter((convo) => convo.id === id)[0];
+  console.log(convo);
+
+  if (convo) {
+    res.status(201).json({
+      message: `Successfully retrieved conversation with id ${id}`,
+      convo,
+    });
+  } else {
+    res.status(404).json({
+      message: `No conversation with id ${id} on record`,
+    });
+  }
 };
