@@ -33,20 +33,20 @@ The project needs to be configured with your Auth0 domain and client ID in order
 
 1. Go to [Auth0](https://auth0.com/signup) and click Sign Up.
 2. Use Google, GitHub or Microsoft Account to login.
-3. Add your auth0 details as shown in `example.env` in the client directory and rename the file to `.env`:
+3. Add your auth0 details as shown in `example.auth_config.json` in the client directory and rename the file to `auth_config.json`. Make sure to .gitignore this file since it contains sensitive information.
 
 ## MongoDB
 
 This project uses MongoDB as database solution.
 
-### Compiles and hot-reloads for development
+## Compiles and hot-reloads for development
 
-## All below TBD
+### All below TBD
 
 server from server dir:
 
 ```bash
-npm start
+npx tsc -w && npm start
 ```
 
 client from client dir:
@@ -55,7 +55,7 @@ client from client dir:
 npm run serve
 ```
 
-## Deployment
+<!-- ## Deployment -->
 
 <!-- ### Compiles and minifies for production
 
