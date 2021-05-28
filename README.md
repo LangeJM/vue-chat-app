@@ -25,9 +25,9 @@ npm run installAll
 
 Remember that for the node/express app in the [server folder](./server), when you install packages locally (and not globally) you need to prefix every command with `npx`. This is true for Typescript (`npx tsc server.ts`) and Nodemon (`npx nodemon server.js`).
 
-### Configuration
+## Configuration
 
-## Auth0
+### Auth0
 
 The project needs to be configured with your Auth0 domain and client ID in order for the authentication flow to work.
 
@@ -35,9 +35,10 @@ The project needs to be configured with your Auth0 domain and client ID in order
 2. Use Google, GitHub or Microsoft Account to login.
 3. Add your auth0 details as shown in `example.auth_config.json` in the client directory and rename the file to `auth_config.json`. Make sure to .gitignore this file since it contains sensitive information.
 
-## MongoDB
+### MongoDB
 
 This project uses MongoDB as database solution.
+The configuration of the Mongo URI needs to be placed in the .env file in the server folder. Refer to `example.env`.
 
 ## Compiles and hot-reloads for development
 
