@@ -1,3 +1,5 @@
+**_This is WIP!!!_**
+
 # Vue Chat App
 
 This is meant as a training exercise to better familiarize myself with Vue (currently 2.6.12) as Node, Express, Typescript, MongoDB.
