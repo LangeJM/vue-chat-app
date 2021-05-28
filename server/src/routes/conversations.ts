@@ -12,7 +12,7 @@ router.post("/", createConversation);
 
 router.get("/", getAllConversations);
 
-router.get("/:id", getConversation);
+router.get("/getOne", getConversation);
 
 router.patch("/:id");
 
