@@ -11,7 +11,11 @@ import {
   faPaperPlane
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { domain, clientId } from "../auth_config.json";
+// import { domain, clientId } from "../auth_config.json";
+console.log(process.env.VUE_APP_DOMAIN);
+
+const domain = process.env.VUE_APP_DOMAIN;
+const clientId = process.env.VUE_APP_CLIENT_ID;
 
 Vue.config.productionTip = false;
 
