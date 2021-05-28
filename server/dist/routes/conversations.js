@@ -5,6 +5,6 @@ const conversations_1 = require("../controllers/conversations");
 const router = express_1.Router();
 router.post("/", conversations_1.createConversation);
 router.get("/", conversations_1.getAllConversations);
-router.get("/:id", conversations_1.getConversation);
+router.get("/getOne", conversations_1.getConversation);
 router.patch("/:id");
 exports.default = router;

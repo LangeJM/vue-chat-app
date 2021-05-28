@@ -36,16 +36,24 @@ const arrayLimit = (val) => {
 };
 const ConversationSchema = new mongoose_1.default.Schema({
     subscribers: {
-        type: [String],
+        type: [
+            {
+                type: String,
+                match: [
+                    /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+                    "Please input a valid email address",
+                ],
+            },
+        ],
         // Below is the attempt to embed the Subscriber model
         // type: [mongoose.Schema.Types.ObjectId],
         // ref: "SubscriberSchema",
         required: true,
-        validate: [arrayLimit, "{PATH} exceeds the limit of 2"],
+        validate: [arrayLimit, "{PATH} exceeds the limit of two"],
     },
-    date: {
+    createdAt: {
         type: Date,
-        default: new Date(Date.now()),
+        default: Date.now,
     },
     messages: [],
 });

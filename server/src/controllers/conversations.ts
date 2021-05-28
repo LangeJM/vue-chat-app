@@ -5,34 +5,57 @@ const Conversation = require("../models/Conversation");
 // const CONVERSATIONS: Conversation[] = [];
 
 export const createConversation: RequestHandler = async (req, res, next) => {
-  const conversation = await Conversation.create(req.body);
+  try {
+    const convoExists = await Conversation.find({
+      subscribers: { $all: req.body.subscribers },
+    });
+    if (convoExists.length)
+      throw "A conversation for these subscribers already exists";
 
-  res.status(201).json({
-    message: "Successfully created new conversation",
-    createdConversation: conversation,
-  });
+    const conversation = await Conversation.create(req.body);
+
+    res.status(201).json({
+      message: "Successfully created new conversation",
+      data: conversation,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: error,
+    });
+  }
 };
 
-export const getAllConversations: RequestHandler = (req, res, next) => {
-  res.status(201).json({
-    message: "List of all stored conversations",
-    // allConversations: CONVERSATIONS,
-  });
+export const getAllConversations: RequestHandler = async (req, res, next) => {
+  try {
+    const conversations = await Conversation.find();
+
+    res.status(200).json({
+      message: "Returning a list of all stored conversations",
+      data: conversations,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: error,
+    });
+  }
 };
 
-export const getConversation: RequestHandler = (req, res, next) => {
-  const id = (req.params as { id: string }).id;
-  // const convo = CONVERSATIONS.filter((convo) => convo.id === id)[0];
-  // console.log(convo);
+export const getConversation: RequestHandler = async (req, res, next) => {
+  try {
+    if (req.body.subscribers.length !== 2)
+      throw "The request object needs to include two subscribers";
 
-  // if (convo) {
-  //   res.status(201).json({
-  //     message: `Successfully retrieved conversation with id ${id}`,
-  //     convo,
-  //   });
-  // } else {
-  //   res.status(404).json({
-  //     message: `No conversation with id ${id} on record`,
-  //   });
-  // }
+    const conversation = await Conversation.find({
+      subscribers: { $all: req.body.subscribers },
+    });
+
+    res.status(200).json({
+      message: "Returning the conversation(s) matching the query",
+      data: conversation,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: error,
+    });
+  }
 };
