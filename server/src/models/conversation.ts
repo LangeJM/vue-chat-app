@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const arrayLimit = (val: any) => {
-  return val.length <= 2;
+  return val.length === 2;
 };
 
 const ConversationSchema = new mongoose.Schema({
@@ -15,11 +15,8 @@ const ConversationSchema = new mongoose.Schema({
         ],
       },
     ],
-    // Below is the attempt to embed the Subscriber model
-    // type: [mongoose.Schema.Types.ObjectId],
-    // ref: "SubscriberSchema",
     required: true,
-    validate: [arrayLimit, "{PATH} exceeds the limit of two"],
+    validate: [arrayLimit, "{PATH} must include two entries"],
   },
   createdAt: {
     type: Date,

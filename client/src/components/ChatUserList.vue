@@ -16,6 +16,10 @@ export default {
   data () {
     return {
       users: ["Alexander", "Horst-Peter", "Hashmonai", "Gal"]}
+  },
+  created() {
+    console.log("Component created")
+    fetch
   }
 };
 

@@ -36,10 +36,13 @@ const app = express_1.default();
 app.use(express_1.json());
 app.use("/conversations", conversations_1.default);
 app.use("/users", users_1.default);
+// error object has status? Implement!
+// use next
 app.use((err, req, res, next) => {
-    res.status(500).json({
+    res.status(res.statusCode || 500).json({
         message: err.message,
     });
+    next();
 });
 const server = app.listen(process.env.PORT, () => {
     console.log(`Server listening on port ${process.env.PORT}`.cyan);
