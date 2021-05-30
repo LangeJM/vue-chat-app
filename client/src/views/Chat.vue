@@ -51,13 +51,13 @@ export default {
   }
 
   #chat-user-container {
-    width: 20%;
+    width: 30%;
     display: flex;
     flex-direction: column;
     height: 90%;
   }
   #chat-content-container {
-    width: 80%;
+    width: 70%;
     height: 90%;
     display: flex;
     flex-direction: column;

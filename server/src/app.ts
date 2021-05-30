@@ -1,17 +1,17 @@
 import dotenv from "dotenv";
 import express, { json } from "express";
-// previously >> import { json } from "body-parser";
+import cors from "cors";
 import conversationRoutes from "./routes/conversations";
 import userRoutes from "./routes/users";
 import { connectDB } from "./db/db";
 import colors from "colors";
-import { nextTick } from "process";
 
 dotenv.config();
 connectDB();
 colors.enable();
 
 const app = express();
+app.use(cors());
 
 app.use(json());
 
