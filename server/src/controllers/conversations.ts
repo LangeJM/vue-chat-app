@@ -1,8 +1,7 @@
 import { RequestHandler } from "express";
-// import { Conversation } from "../models/Conversation"   ;
-const Conversation = require("../models/Conversation");
 
-// const CONVERSATIONS: Conversation[] = [];
+import { Message } from "../models/Message";
+import { Conversation } from "../models/Conversation";
 
 export const createConversation: RequestHandler = async (req, res, next) => {
   try {
@@ -19,8 +18,9 @@ export const createConversation: RequestHandler = async (req, res, next) => {
       data: conversation,
     });
   } catch (error) {
+    console.log(error);
     res.status(400).json({
-      message: error,
+      message: error.message ? error.message : error,
     });
   }
 };
@@ -51,6 +51,36 @@ export const getConversation: RequestHandler = async (req, res, next) => {
 
     res.status(200).json({
       message: "Returning the conversation(s) matching the query",
+      data: conversation,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: error,
+    });
+  }
+};
+
+export const createMessage: RequestHandler = async (req, res, next) => {
+  try {
+    const userArray: string[] = [req.body.author, req.body.recipient];
+    if (userArray.length !== 2)
+      throw "The request object needs to include an author and a recipient";
+
+    const message = new Message(req.body);
+
+    const conversation = await Conversation.findOneAndUpdate(
+      { subscribers: { $all: [req.body.author, req.body.recipient] } },
+      {
+        $push: {
+          messages: message,
+        },
+      },
+      // If option new is set to true returns the updated document
+      { new: true }
+    );
+
+    res.status(200).json({
+      message: "Returning the updated conversation",
       data: conversation,
     });
   } catch (error) {

@@ -1,0 +1,4 @@
+Notes:
+1. when using general scripts you should use a main package.json file in the root project in order the run the inner scripts from the root (npm install, build, setup etc..)
+2. Add .gitignore file in order the exclude some files such as package-lock.json and node-modules folders
+3. out of the box there are compilation issues that prevent the app from running (file name was 'models/conversations.ts' instead of 'models/Conversations.ts')

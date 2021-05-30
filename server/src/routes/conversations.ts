@@ -4,6 +4,7 @@ import {
   createConversation,
   getAllConversations,
   getConversation,
+  createMessage,
 } from "../controllers/conversations";
 
 const router = Router();
@@ -14,6 +15,6 @@ router.get("/", getAllConversations);
 
 router.get("/getOne", getConversation);
 
-router.patch("/:id");
+router.patch("/message", createMessage);
 
 export default router;

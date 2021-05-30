@@ -6,5 +6,5 @@ const router = express_1.Router();
 router.post("/", conversations_1.createConversation);
 router.get("/", conversations_1.getAllConversations);
 router.get("/getOne", conversations_1.getConversation);
-router.patch("/:id");
+router.patch("/message", conversations_1.createMessage);
 exports.default = router;
