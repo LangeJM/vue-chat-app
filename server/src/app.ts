@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import express, { json } from "express";
 // previously >> import { json } from "body-parser";
 import conversationRoutes from "./routes/conversations";
+import userRoutes from "./routes/users";
 import { connectDB } from "./db/db";
 import colors from "colors";
 
@@ -14,6 +15,7 @@ const app = express();
 app.use(json());
 
 app.use("/conversations", conversationRoutes);
+app.use("/users", userRoutes);
 
 app.use(
   (

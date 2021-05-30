@@ -26,6 +26,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const express_1 = __importStar(require("express"));
 // previously >> import { json } from "body-parser";
 const conversations_1 = __importDefault(require("./routes/conversations"));
+const users_1 = __importDefault(require("./routes/users"));
 const db_1 = require("./db/db");
 const colors_1 = __importDefault(require("colors"));
 dotenv_1.default.config();
@@ -34,6 +35,7 @@ colors_1.default.enable();
 const app = express_1.default();
 app.use(express_1.json());
 app.use("/conversations", conversations_1.default);
+app.use("/users", users_1.default);
 app.use((err, req, res, next) => {
     res.status(500).json({
         message: err.message,
