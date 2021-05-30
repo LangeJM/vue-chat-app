@@ -17,8 +17,9 @@ const createConversation = async (req, res, next) => {
         });
     }
     catch (error) {
+        console.log(error);
         res.status(400).json({
-            message: error,
+            message: error.message ? error.message : error,
         });
     }
 };

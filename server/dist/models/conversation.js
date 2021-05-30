@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Conversation = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const arrayLimit = (val) => {
-    return val.length <= 2;
+    return val.length === 2;
 };
 const ConversationSchema = new mongoose_1.default.Schema({
     subscribers: {
@@ -19,11 +19,8 @@ const ConversationSchema = new mongoose_1.default.Schema({
                 ],
             },
         ],
-        // Below is the attempt to embed the Subscriber model
-        // type: [mongoose.Schema.Types.ObjectId],
-        // ref: "SubscriberSchema",
         required: true,
-        validate: [arrayLimit, "{PATH} exceeds the limit of two"],
+        validate: [arrayLimit, "{PATH} must include two entries"],
     },
     createdAt: {
         type: Date,

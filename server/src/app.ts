@@ -2,8 +2,10 @@ import dotenv from "dotenv";
 import express, { json } from "express";
 // previously >> import { json } from "body-parser";
 import conversationRoutes from "./routes/conversations";
+import userRoutes from "./routes/users";
 import { connectDB } from "./db/db";
 import colors from "colors";
+import { nextTick } from "process";
 
 dotenv.config();
 connectDB();
@@ -14,7 +16,10 @@ const app = express();
 app.use(json());
 
 app.use("/conversations", conversationRoutes);
+app.use("/users", userRoutes);
 
+// error object has status? Implement!
+// use next
 app.use(
   (
     err: Error,
@@ -22,9 +27,10 @@ app.use(
     res: express.Response,
     next: express.NextFunction
   ) => {
-    res.status(500).json({
+    res.status(res.statusCode || 500).json({
       message: err.message,
     });
+    next();
   }
 );
 

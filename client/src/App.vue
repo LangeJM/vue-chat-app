@@ -28,7 +28,7 @@ export default {
   created() {
     setTimeout(() => {
       this.$store.commit('setActiveUser', this.$auth.user)
-    }, 700);
+    }, 1000);
   }
 };
 </script>
