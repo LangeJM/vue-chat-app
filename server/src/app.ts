@@ -18,8 +18,6 @@ app.use(json());
 app.use("/conversations", conversationRoutes);
 app.use("/users", userRoutes);
 
-// error object has status? Implement!
-// use next
 app.use(
   (
     err: Error,
