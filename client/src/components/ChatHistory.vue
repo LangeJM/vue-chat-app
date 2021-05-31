@@ -1,5 +1,5 @@
 <template>
-  <div v-if="selectedMessages" id="msg-container" class="text-left d-flex flex-column border">
+  <div v-if="selectedConversation && selectedMessages" id="msg-container" class="text-left d-flex flex-column border">
     <div id="msg" v-for="(msg, index) in selectedMessages" :key="index" 
     :style="[msg.author === $store.state.user.email ? {'align-self': 'flex-end', 'background' : 'rgb(154, 237, 160)'} : {'align-self': 'flex-start', 'background' : 'white'}]"
     >
@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: "UserPane",
+  name: "ChatHistory",
   data() {
     return {
       messages: this.selectedConversation.messages
@@ -42,7 +42,7 @@ export default {
     flex: 1 1 0;
     position: relative;
     order: 2;
-    padding-bottom: 20rem;
+    
   }
   #msg {
     margin: 0.5rem 2rem;
