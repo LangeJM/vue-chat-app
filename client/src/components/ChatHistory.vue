@@ -1,10 +1,12 @@
 <template>
-  <div v-if="selectedConversation && selectedMessages" id="msg-container" class="text-left d-flex flex-column border">
+  <div ref="msgContainer" v-if="selectedConversation && selectedMessages" id="msg-container" class="text-left d-flex flex-column border">
     <div id="msg" v-for="(msg, index) in selectedMessages" :key="index" 
     :style="[msg.author === $store.state.user.email ? {'align-self': 'flex-end', 'background' : 'rgb(154, 237, 160)'} : {'align-self': 'flex-start', 'background' : 'white'}]"
     >
       {{msg.message}}
+      <div id="msg-date">{{msg.createdAt}}</div>
     </div>
+    
     <div id="spacebar"/>
     
   </div>
@@ -31,7 +33,12 @@ export default {
       selectedMessages() {
         return this.$store.state.activeConversation.messages
       }
-    },  
+    },
+    updated() {
+      const msgContainer = this.$refs.msgContainer
+      msgContainer.scrollTop = msgContainer.scrollHeight;
+      
+    }  
 };
 </script>
 <style scoped>
@@ -52,5 +59,9 @@ export default {
   }
   #spacebar {
     min-height: 1rem;
+  }
+  #msg-date {
+    text-align: right;
+    font-size: 70%;
   }
 </style>
