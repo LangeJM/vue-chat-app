@@ -20,13 +20,13 @@ The [auth0 sample apps](https://github.com/auth0-samples/auth0-vue-samples) were
 ## Project setup
 
 Please note, this setup works with Node version 12.22.1!
-In order to install all dependencies for the client and the server application, execute:
+To install both client and server make sure you have the [concurrently library](https://www.npmjs.com/package/concurrently) installed and from the project root directory run:
 
 ```bash
-npm run installAll
+npm run installDev
 ```
 
-Remember that for the node/express app in the [server folder](./server), when you install packages locally (and not globally) you need to prefix every command with `npx`. This is true for Typescript (`npx tsc server.ts`) and Nodemon (`npx nodemon server.js`).
+As a side note, remember that for the node/express app in the [server folder](./server), when you install packages locally (and not globally) you need to prefix every command with `npx`. This is true for Typescript (`npx tsc server.ts`) and Nodemon (`npx nodemon server.js`).
 
 ## Configuration
 
@@ -43,20 +43,12 @@ The project needs to be configured with your Auth0 domain and client ID in order
 This project uses MongoDB as database solution.
 The configuration of the Mongo URI needs to be placed in the .env file in the server folder. Refer to `example.env`.
 
-## Compiles and hot-reloads for development
+## Run App
 
-### All below TBD
-
-server from server dir:
+To start both client and server, from the project root directory run (again needs [concurrently library](https://www.npmjs.com/package/concurrently)):
 
 ```bash
-npx tsc -w && npm start
-```
-
-client from client dir:
-
-```bash
-npm run serve
+npm run dev
 ```
 
 <!-- ## Deployment -->
