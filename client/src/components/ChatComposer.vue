@@ -16,7 +16,7 @@ export default {
         message: this.$store.state.message
       }
       try {
-        const response = await fetch("http://localhost:5000/conversations/message", {
+        await fetch("http://localhost:5000/conversations/message", {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json"
@@ -24,8 +24,7 @@ export default {
           body: JSON.stringify(requestBody)
           // body: subscribers
         });
-        const data = await response.json();
-        console.log(data)
+        
       } catch (error) {
         console.log(error);
       }
