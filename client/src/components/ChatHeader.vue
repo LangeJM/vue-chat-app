@@ -24,8 +24,8 @@ export default {
    margin: 0;
    background-color: #f8f9fa;
    position: relative;
-   /* height: 64px; */
    height: 4rem;
+   min-height: 8%;
    padding: 0.5rem;
    
  }
@@ -44,6 +44,4 @@ export default {
    color: rgba(11, 130, 194, 1);
    font-size: smaller;
  }
-
-  
 </style>

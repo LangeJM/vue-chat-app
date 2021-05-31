@@ -1,7 +1,15 @@
 <template>
-  <div id="msg-container" class="text-left d-flex flex-column border">
-    <div id="msg" v-for="(msg, index) in messages" :key="index">
-      {{msg}}
+  <div v-if="selectedMessages" id="msg-container" class="text-left d-flex flex-column border" ref="msgContainer">
+    <div id="msg" v-for="(msg, index) in selectedMessages" :key="index" 
+    :style="[msg.author === $store.state.user.email ? {'align-self': 'flex-end', 'background' : 'rgb(154, 237, 160)'} : {'align-self': 'flex-start', 'background' : 'white'}]"
+    >
+      {{msg.message}}
+    </div>
+    
+  </div>
+  <div v-else id="msg-container" class="text-left d-flex flex-column border" ref="msgContainer">
+    <div id="msg">
+      
     </div>
     
   </div>
@@ -12,18 +20,17 @@ export default {
   name: "UserPane",
   data() {
     return {
-      messages: [
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tempor interdum dolor vel imperdiet. Proin arcu dolor, pellentesque efficitur porttitor eu, posuere sed ante.",
-        "Phasellus placerat libero ullamcorper risus mollis, a mollis mauris tincidunt.",
-        "Vestibulum laoreet, sapien ac accumsan semper, purus lorem commodo tortor, et dignissim dolor ex ut sem",
-        "Cras placerat sit amet sapien ac dictum. Sed auctor tristique velit vitae ultrices. Curabitur venenatis lobortis ex, ut maximus sem tincidunt eu.",
-        "Phasellus feugiat leo non quam porta dignissim.",
-        "Ut vulputate tincidunt mauris, ut gravida massa imperdiet vel.",
-        "Nam accumsan mollis elit, et mattis neque pellentesque eu. Aenean non vehicula ante."
-      ]
+      messages: this.selectedConversation.messages
       }
-    }
-  
+    },
+    computed: {
+      selectedConversation() {
+        return this.$store.state.activeConversation
+      },
+      selectedMessages() {
+        return this.$store.state.activeConversation.messages
+      }
+    },  
 };
 </script>
 <style scoped>
@@ -36,11 +43,10 @@ export default {
     order: 2;
   }
   #msg {
-    margin: 0.75rem 2rem;
+    margin: 0.5rem 2rem;
     width: 75%;
-    border: 1px solid #dee2e6 ;
-    padding: 0.75rem 0.5rem;
+    padding: 0.5rem 0.5rem 0.5rem;
     border-radius: 0.5rem;
-    background-color: white;
+    
   }
 </style>
