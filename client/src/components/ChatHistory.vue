@@ -21,24 +21,19 @@
 <script>
 export default {
   name: "ChatHistory",
-  data() {
-    return {
-      messages: this.selectedConversation.messages
-      }
+  computed: {
+    selectedConversation() {
+      return this.$store.state.activeConversation
     },
-    computed: {
-      selectedConversation() {
-        return this.$store.state.activeConversation
-      },
-      selectedMessages() {
-        return this.$store.state.activeConversation.messages
-      }
-    },
-    updated() {
-      const msgContainer = this.$refs.msgContainer
-      msgContainer.scrollTop = msgContainer.scrollHeight;
-      
-    }  
+    selectedMessages() {
+      return this.$store.state.activeConversation.messages
+    }
+  },
+  updated() {
+    const msgContainer = this.$refs.msgContainer
+    msgContainer.scrollTop = msgContainer.scrollHeight;
+    
+  }  
 };
 </script>
 <style scoped>

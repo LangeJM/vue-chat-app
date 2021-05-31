@@ -7,15 +7,19 @@ export const createUser: RequestHandler = async (req, res, next) => {
     const userExists = await User.find({
       email: { $all: req.body.email },
     });
-    if (userExists.length)
-      throw "A user with this email address already exists";
+    if (userExists.length) {
+      res.status(201).json({
+        message: "Returning already existing user",
+        data: userExists,
+      });
+    } else {
+      const user = await User.create(req.body);
 
-    const user = await User.create(req.body);
-
-    res.status(201).json({
-      message: "Successfully created new user",
-      data: user,
-    });
+      res.status(201).json({
+        message: "Successfully created new user",
+        data: user,
+      });
+    }
   } catch (error) {
     res.status(400).json({
       message: error,

@@ -9,6 +9,7 @@ export const store = new Vuex.Store({
   state: {
     message: "",
     user: {},
+    previousUser: {},
     userList: [],
     selectedUser: {},
     activeConversation: {}
@@ -23,7 +24,8 @@ export const store = new Vuex.Store({
       return (state.message = payload);
     },
     setActiveUser: (state, payload) => {
-      return (state.user = payload);
+      state.previousUser = state.user;
+      state.user = payload;
     },
     setUserList: (state, payload) => {
       return (state.userList = payload);
