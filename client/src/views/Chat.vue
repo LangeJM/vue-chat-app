@@ -41,6 +41,7 @@ export default {
     display: flex;
     flex-direction: column;
     height: 90%;
+    border: 1px solid #dee2e6;
   }
   #chat-content-container {
     width: 70%;

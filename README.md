@@ -7,7 +7,6 @@ The [auth0 sample apps](https://github.com/auth0-samples/auth0-vue-samples) were
 
 ## Missing features and fixes
 
-- Currently the user object which is provided by Auth0 is committed to the on App.vue mount (lifecycle method) with the help of setTimeout(700). Needs to be changed to async/Promise based implementation (plus store actions I guess) or maybe can go without the store entirely.
 - Auth0 wrapper used is not 100% clear and shows unexpected behavior. Need to do more research into Auth0.
 - Need to connect active user endpoint (before that need to better understand auth0)
 - Conversation container with chat messages needs to auto-scroll

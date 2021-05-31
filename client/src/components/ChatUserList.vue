@@ -3,8 +3,8 @@
 <template>
   <div id="user-list" >
     <div id="user-box" v-on:click="selectUser(user)" v-for="(user, index) in users" :key="index" style="padding: 1rem; border: 1px solid #dee2e6; display: flex; justify-content: space-between; cursor: pointer;" :style="[selectedUser.email === user.email ? {'background': 'rgba(148, 198, 231, 0.244)'} : {'background': ''}]" >
-      <div >{{user.email}}</div>
-      <div id=onlineCircle :style="[user.online ? {'background': 'rgb(54, 221, 82)'} : {'background': 'rgb(202, 199, 199)'}]" ></div>
+      <div id="user-text">{{user.email}}</div>
+      <div id=online-circle :style="[user.online ? {'background': 'rgb(54, 221, 82)'} : {'background': 'rgb(202, 199, 199)'}]" ></div>
     </div>
   </div>
 </template>
@@ -30,11 +30,10 @@ export default {
     },
   }, 
 };
-
 </script>
 
-<style scoped>
-  #onlineCircle {
+<style scoped lang="scss">
+  #online-circle {
     border-radius: 50%;
     width:1rem;
     height: 1rem;
@@ -49,11 +48,14 @@ export default {
     height: 100%;
   };
   #user-box {
-    /* padding: 2rem, 2rem , 2rem, 1.5rem; */
     padding:2rem;
     border: 1px solid #dee2e6;
     display: flex;
     justify-content: space-between;
     cursor: pointer;
   };
+  #user-text {
+    overflow: hidden;
+    max-width:80%; 
+  }
 </style>
