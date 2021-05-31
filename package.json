@@ -1,0 +1,24 @@
+{
+  "name": "vue-chat-app",
+  "version": "1.0.0",
+  "description": "MEVN Chat App to learn Vue and practice Node with Typescript",
+  "main": "",
+  "scripts": {
+    "client": "cd client && npm start",
+    "installClient": "cd client && npm install",
+    "backend": "cd server && npm start",
+    "installBackend": "cd server && npm install",
+    "dev": "concurrently \"npm run backend\" \"npm run client\"",
+    "installDev": "concurrently \"npm run installBackend\" \"npm run installClient\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LangeJM/vue-chat-app.git"
+  },
+  "author": "JL",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LangeJM/vue-chat-app/issues"
+  },
+  "homepage": "https://github.com/LangeJM/vue-chat-app#readme"
+}

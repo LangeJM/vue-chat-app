@@ -27,9 +27,9 @@ export default {
   },
   async updated() {
       this.$store.commit('setActiveUser', this.$auth.user)
-      console.log(`Auth Email after update: ${this.$auth.user.email}`)
-      console.log(`Active User email after update: ${this.$store.state.user.email}`)
-      console.log(`Previous Active User email after update: ${this.$store.state.previousUser.email}`)
+      // console.log(`Auth Email after update: ${this.$auth.user.email}`)
+      // console.log(`Active User email after update: ${this.$store.state.user.email}`)
+      // console.log(`Previous Active User email after update: ${this.$store.state.previousUser.email}`)
       if (this.$store.state.user.email && this.$store.state.previousUser.email === undefined) {
         try {
           await fetch("http://localhost:5000/users", {

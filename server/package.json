@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx nodemon dist/app.js",
-    "installAll": "(cd client && npm install); (cd server && npm install);"
+    "start": "npx nodemon dist/app.js"
   },
   "author": "",
   "license": "ISC",

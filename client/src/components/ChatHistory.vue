@@ -49,7 +49,7 @@ export default {
   #msg {
     margin: 0.5rem 2rem;
     width: 75%;
-    padding: 0.5rem 0.5rem 0.5rem;
+    padding: 0.5rem 1rem 0.5rem;
     border-radius: 0.5rem;    
   }
   #spacebar {
