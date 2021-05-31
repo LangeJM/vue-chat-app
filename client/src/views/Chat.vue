@@ -7,7 +7,7 @@
     <div id="chat-content-container"> 
       <chat-header header-title="Chat History"/>
       <chat-history/>
-      <chat-composer v-on:get-message="alert" :chatMessage="message" @updateMessage="updateMessage"/>
+      <chat-composer />
     </div>
     
   </div>
@@ -26,20 +26,6 @@ export default {
     ChatHistory,
     ChatComposer,
     ChatHeader,
-  },
-  data() {
-    return {
-      message: "",
-    }
-  },
-  methods: {
-    alert() {
-      alert(this.$store.state.message)
-      this.$store.commit('changeMessage', "")
-    },
-    updateMessage(msg) {
-      this.message = msg
-    }
   },
 }
 </script>

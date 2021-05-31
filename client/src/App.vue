@@ -28,8 +28,9 @@ export default {
   created() {
     setTimeout(() => {
       this.$store.commit('setActiveUser', this.$auth.user)
-    }, 1000);
-  }
+    }, 1500);
+    console.log(`Active User: ${this.$auth.user.email}`)
+  },
 };
 </script>
 

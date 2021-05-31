@@ -7,13 +7,33 @@
 
 <script>
 export default {
-  name: "ChatComposer",
-  
+  name: "ChatComposer",  
   methods: {
-    onClick() {
-      this.$emit('get-message');
-      // The line below resets the height of the textarea which has been modified to expand based on content
+    async onClick() {
+      const requestBody = {
+        author: this.$store.state.user.email,
+        recipient: this.$store.state.selectedUser.email,
+        message: this.$store.state.message
+      }
+      try {
+        const response = await fetch("http://localhost:5000/conversations/message", {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(requestBody)
+          // body: subscribers
+        });
+        const data = await response.json();
+        console.log(data)
+      } catch (error) {
+        console.log(error);
+      }
       this.$refs.textarea.style.height = "2.5rem";
+      this.$store.commit('changeMessage',"")
+      this.$store.dispatch("getConversation", [this.$store.state.user.email,this.$store.state.selectedUser.email])
+
+
     },
     onChange (e) {
       // This is for training purposes only, there is no need to emit to parent. All can be handle here..
@@ -33,10 +53,7 @@ export default {
   
 </script>
 <style scoped lang="scss">
-/*
-[contentEditable=true]:empty:not(:focus):before{content:attr(data-ph)} 
-This is for the div version to simulate textarea behaviour 
-*/
+
 #chat-message-container {
   min-height: 60px;
   background-color: #f8f9fa;
@@ -58,9 +75,6 @@ This is for the div version to simulate textarea behaviour
   overflow: hidden;  
   height: 2.5rem;
 }
-// #chat-message::placeholder {
-//   border: grey;
-//   padding: 0.5rem;  
-// }
+
 
 </style>

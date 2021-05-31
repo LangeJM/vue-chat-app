@@ -8,15 +8,18 @@ export const createConversation: RequestHandler = async (req, res, next) => {
     const convoExists = await Conversation.find({
       subscribers: { $all: req.body.subscribers },
     });
-    if (convoExists.length)
-      throw "A conversation for these subscribers already exists";
-
-    const conversation = await Conversation.create(req.body);
-
-    res.status(201).json({
-      message: "Successfully created new conversation",
-      data: conversation,
-    });
+    if (convoExists.length) {
+      res.status(202).json({
+        message: "Returning conversation matching the query",
+        data: convoExists,
+      });
+    } else {
+      const conversation = await Conversation.create(req.body);
+      res.status(201).json({
+        message: "Creating and returning new conversation",
+        data: conversation,
+      });
+    }
   } catch (error) {
     console.log(error);
     res.status(400).json({
