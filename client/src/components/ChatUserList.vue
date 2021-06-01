@@ -28,6 +28,12 @@ export default {
       this.$store.commit("selectUser", user)
       this.$store.dispatch("getConversation", [this.$store.state.user.email,user.email]) 
     },
+  },
+  sockets: {
+    userStatusChange() {
+      console.log("New User returning from the server");
+      this.$store.dispatch("getUserList");
+    }
   }, 
 };
 </script>

@@ -27,9 +27,12 @@ export default {
     ChatComposer,
     ChatHeader,
   },
-  beforeUnmount() {
-    console.log("Chat page unmounting!")
+  created() {
+    setTimeout(() => {
+      this.$socket.emit("newUserOnline", this.$store.state.user.email);
+    }, 1000);
   }
+  
 }
 </script>
 
