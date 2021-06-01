@@ -39,19 +39,19 @@ export default {
 <style lang="scss" scoped>
   #chat-container {
     display: flex;
-    height: 100%;
+    height: 90%;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   }
 
   #chat-user-container {
     width: 30%;
     display: flex;
     flex-direction: column;
-    height: 90%;
-    border: 1px solid #dee2e6;
+    height: 100%;
   }
   #chat-content-container {
     width: 70%;
-    height: 90%;
+    height: 100%;
     display: flex;
     flex-direction: column;
   }

@@ -21,11 +21,12 @@ export default {
    text-align: left;
    display: flex;
    border: 1px solid #dee2e6;
+   border-bottom: none;
    margin: 0;
    background-color: #f8f9fa;
    position: relative;
    height: 4rem;
-   min-height: 8%;
+   min-height: 10%;
    padding: 0.5rem;
    
  }
