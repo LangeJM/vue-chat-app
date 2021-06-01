@@ -14,7 +14,7 @@ export default {
   name: "ChatUserList",
   computed: {
     users() {
-      return this.$store.state.userList
+      return this.$store.state.userList.filter(user => user.email !== this.$store.state.user.email)
     },
     selectedUser() {
       return this.$store.state.selectedUser
