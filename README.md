@@ -8,12 +8,11 @@ The [auth0 sample apps](https://github.com/auth0-samples/auth0-vue-samples) were
 ## Missing features and fixes
 
 - Auth0 wrapper used is not 100% clear and shows unexpected behavior. Need to do more research into Auth0.
-- Need to connect active user endpoint (before that need to better understand auth0)
-- Conversation container with chat messages needs to auto-scroll
 - Api and DB implementation:
   - Since I am new to Typescript, there are long passages where there is no (or only weak) Typescript implementation.
   - I can't seem to get mongoose models/Schemas embedded in other models/ Schemas (could import schemas as javascript objects and use them within controllers)
   - Needs websockets implementation
+  - Needs (auth0) protected routes (client requests to server)
   - Full test suite?
 - Lastly, this is based on a Vue2 template. Eventually this should be converted to Vue3
 
