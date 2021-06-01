@@ -77,6 +77,7 @@ const createMessage = async (req, res, next) => {
         }, 
         // If option new is set to true returns the updated document
         { new: true });
+        console.log(`New Message Created, this should trigger a websocket event for user: ${req.body.recipient}`);
         res.status(200).json({
             message: "Returning the updated conversation",
             data: conversation,

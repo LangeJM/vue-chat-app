@@ -27,6 +27,9 @@ export default {
     ChatComposer,
     ChatHeader,
   },
+  beforeUnmount() {
+    console.log("Chat page unmounting!")
+  }
 }
 </script>
 
