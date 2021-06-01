@@ -10,7 +10,6 @@ export default {
   name: "ChatComposer",
   sockets: {
     newMessage: function(data) {
-      console.log("New message returning from the server:", data);
       if (data.author === this.$store.state.selectedUser.email && data.recipient === this.$store.state.user.email) {
         this.$store.dispatch("getConversation", [data.author, data.recipient])
       }
@@ -42,9 +41,6 @@ export default {
       this.$socket.emit("newMessage", socketMessageObject);
       this.$store.dispatch("getConversation", [this.$store.state.user.email,this.$store.state.selectedUser.email])
     },
-    onKeyPress(){
-      console.log("Pressed Key")
-      },
     onChange (e) {
       // This is for training purposes only, there is no need to emit to parent. All can be handle here..
       this.$store.commit('changeMessage',e.target.value)

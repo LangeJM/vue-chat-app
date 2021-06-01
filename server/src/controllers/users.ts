@@ -70,7 +70,6 @@ export const updateUser: RequestHandler = async (req, res, next) => {
         // If option new is set to true returns the updated document
         { new: true }
       );
-      console.log(`Status change of user ${req.body.email}`);
 
       res.status(200).json({
         message: "Returning the updated conversation",

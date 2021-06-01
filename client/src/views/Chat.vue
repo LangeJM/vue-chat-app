@@ -30,7 +30,7 @@ export default {
   created() {
     setTimeout(() => {
       this.$socket.emit("newUserOnline", this.$store.state.user.email);
-    }, 1000);
+    }, 200);
   }
   
 }

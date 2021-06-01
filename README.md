@@ -11,7 +11,7 @@ The [auth0 sample apps](https://github.com/auth0-samples/auth0-vue-samples) were
 - Api and DB implementation:
   - Since I am new to Typescript, there are long passages where there is no (or only weak) Typescript implementation.
   - I can't seem to get mongoose models/Schemas embedded in other models/ Schemas (could import schemas as javascript objects and use them within controllers)
-  - Websockets implementation needs refactoring
+  - Websockets implementation needs refactoring (e.g. websocket code needs its own module, triggering of new user event by lifecycle hook "created" is not efficient (fires too often)...)
   - Needs (auth0) protected routes (client requests to server)
   - Full test suite?
 - Lastly, this is based on a Vue2 template. Eventually this should be converted to Vue3

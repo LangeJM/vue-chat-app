@@ -45,12 +45,10 @@ export const io = require("socket.io")(server, {
 });
 io.on("connection", function (socket: Socket) {
   socket.on("disconnect", function () {
-    // console.log(`DISCONNECTED: User with socketID: ${socket.id}`);
     setUserOffline(socket.id);
     socket.broadcast.emit("userStatusChange");
   });
   socket.on("newUserOnline", function (token: any) {
-    // console.log(`CONNECTED: User ${token} with sockedID: ${socket.id}`);
     setUserOnline(token, socket.id);
     socket.broadcast.emit("userStatusChange");
   });
