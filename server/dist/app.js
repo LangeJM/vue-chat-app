@@ -22,6 +22,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.io = void 0;
 const dotenv_1 = __importDefault(require("dotenv"));
 const express_1 = __importStar(require("express"));
 const cors_1 = __importDefault(require("cors"));
@@ -29,6 +30,7 @@ const conversations_1 = __importDefault(require("./routes/conversations"));
 const users_1 = __importDefault(require("./routes/users"));
 const db_1 = require("./db/db");
 const colors_1 = __importDefault(require("colors"));
+const users_2 = require("./controllers/users");
 dotenv_1.default.config();
 db_1.connectDB();
 colors_1.default.enable();
@@ -45,6 +47,25 @@ app.use((err, req, res, next) => {
 });
 const server = app.listen(process.env.PORT, () => {
     console.log(`Server listening on port ${process.env.PORT}`.cyan);
+});
+// Socket IO - Todo: Needs to be separate file/module!!
+exports.io = require("socket.io")(server, {
+    cors: true,
+});
+exports.io.on("connection", function (socket) {
+    socket.on("disconnect", function () {
+        // console.log(`DISCONNECTED: User with socketID: ${socket.id}`);
+        users_2.setUserOffline(socket.id);
+        socket.broadcast.emit("userStatusChange");
+    });
+    socket.on("newUserOnline", function (token) {
+        // console.log(`CONNECTED: User ${token} with sockedID: ${socket.id}`);
+        users_2.setUserOnline(token, socket.id);
+        socket.broadcast.emit("userStatusChange");
+    });
+    socket.on("newMessage", function (token) {
+        socket.broadcast.emit("newMessage", token);
+    });
 });
 // Will stop the program if unhandled exception, here to stop if there's a db auth problem
 process.on("unhandledRejection", (err, promise) => {

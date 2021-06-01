@@ -20,7 +20,6 @@ export const createUser: RequestHandler = async (req, res, next) => {
         data: user,
       });
     }
-    console.log(`New login or signup of user ${req.body.email}`);
   } catch (error) {
     res.status(400).json({
       message: error,
@@ -82,5 +81,48 @@ export const updateUser: RequestHandler = async (req, res, next) => {
     res.status(400).json({
       message: error,
     });
+  }
+};
+
+export const setUserOnline: Function = async (
+  email: String,
+  socketID: String
+) => {
+  try {
+    if (email && socketID) {
+      const user = await User.findOneAndUpdate(
+        { email: email },
+        {
+          socketID: socketID,
+          online: true,
+        },
+        // If option new is set to true returns the updated document
+        { new: true }
+      );
+      console.log(`New status of user ${user.email} is` + " ONLINE".green);
+    } else throw "No user information included";
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const setUserOffline: Function = async (socketID: String) => {
+  try {
+    if (socketID) {
+      const user = await User.findOneAndUpdate(
+        { socketID: socketID },
+        {
+          socketID: "",
+          online: false,
+        },
+        // If option new is set to true returns the updated document
+        { new: true }
+      );
+      console.log(
+        `New status of user with sockedID ${socketID} is` + " OFFLINE".red
+      );
+    } else throw "No user information included";
+  } catch (error) {
+    console.log(error);
   }
 };

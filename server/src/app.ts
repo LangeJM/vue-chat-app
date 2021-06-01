@@ -5,12 +5,15 @@ import conversationRoutes from "./routes/conversations";
 import userRoutes from "./routes/users";
 import { connectDB } from "./db/db";
 import colors from "colors";
+import { Socket } from "socket.io";
+import { setUserOnline, setUserOffline } from "./controllers/users";
 
 dotenv.config();
 connectDB();
 colors.enable();
 
 const app = express();
+
 app.use(cors());
 
 app.use(json());
@@ -34,6 +37,26 @@ app.use(
 
 const server = app.listen(process.env.PORT, () => {
   console.log(`Server listening on port ${process.env.PORT}`.cyan);
+});
+
+// Socket IO - Todo: Needs to be separate file/module!!
+export const io = require("socket.io")(server, {
+  cors: true,
+});
+io.on("connection", function (socket: Socket) {
+  socket.on("disconnect", function () {
+    // console.log(`DISCONNECTED: User with socketID: ${socket.id}`);
+    setUserOffline(socket.id);
+    socket.broadcast.emit("userStatusChange");
+  });
+  socket.on("newUserOnline", function (token: any) {
+    // console.log(`CONNECTED: User ${token} with sockedID: ${socket.id}`);
+    setUserOnline(token, socket.id);
+    socket.broadcast.emit("userStatusChange");
+  });
+  socket.on("newMessage", function (token: any) {
+    socket.broadcast.emit("newMessage", token);
+  });
 });
 
 // Will stop the program if unhandled exception, here to stop if there's a db auth problem

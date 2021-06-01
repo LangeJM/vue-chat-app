@@ -1,13 +1,21 @@
 <template>
   <div id="chat-message-container">
-    <textarea id="chat-message" ref="textarea" placeholder="Type a message" v-on:keyup="resizeTextarea" @input="onChange" :value="message" />
+    <textarea id="chat-message" v-on:keyup.ctrl.enter="onClick" ref="textarea" placeholder="Type a message" v-on:keydown="resizeTextarea" @input="onChange" :value="message" />
     <font-awesome-icon icon="paper-plane" size="2x" v-on:click="onClick" />
   </div>
 </template>
 
 <script>
 export default {
-  name: "ChatComposer",  
+  name: "ChatComposer",
+  sockets: {
+    newMessage: function(data) {
+      console.log("New message returning from the server:", data);
+      if (data.author === this.$store.state.selectedUser.email && data.recipient === this.$store.state.user.email) {
+        this.$store.dispatch("getConversation", [data.author, data.recipient])
+      }
+    },
+  },  
   methods: {
     async onClick() {
       const requestBody = {
@@ -28,12 +36,15 @@ export default {
       } catch (error) {
         console.log(error);
       }
+      const socketMessageObject = {author:requestBody.author, recipient:requestBody.recipient}
       this.$refs.textarea.style.height = "2.5rem";
       this.$store.commit('changeMessage',"")
+      this.$socket.emit("newMessage", socketMessageObject);
       this.$store.dispatch("getConversation", [this.$store.state.user.email,this.$store.state.selectedUser.email])
-
-
     },
+    onKeyPress(){
+      console.log("Pressed Key")
+      },
     onChange (e) {
       // This is for training purposes only, there is no need to emit to parent. All can be handle here..
       this.$store.commit('changeMessage',e.target.value)
@@ -66,7 +77,7 @@ export default {
 }
 
 #chat-message {
-  width: 75%;
+  width: 80%;
   border: grey;
   padding: 0.5rem;
   border-radius: 1rem;
