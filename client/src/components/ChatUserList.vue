@@ -31,7 +31,6 @@ export default {
   },
   sockets: {
     userStatusChange() {
-      console.log("New User returning from the server");
       this.$store.dispatch("getUserList");
     }
   }, 
