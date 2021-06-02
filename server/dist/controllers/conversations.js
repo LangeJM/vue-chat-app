@@ -6,7 +6,7 @@ const Conversation_1 = require("../models/Conversation");
 const createConversation = async (req, res, next) => {
     try {
         const convoExists = await Conversation_1.Conversation.find({
-            subscribers: { $all: req.body.subscribers },
+            subscribers: { $all: req.body },
         });
         if (convoExists.length) {
             res.status(202).json({

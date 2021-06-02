@@ -7,14 +7,16 @@ import {
   createMessage,
 } from "../controllers/conversations";
 
+import { checkJwt } from "../auth/auth_config";
+
 const router = Router();
 
-router.post("/", createConversation);
+router.post("/", checkJwt, createConversation);
 
-router.get("/", getAllConversations);
+router.get("/", checkJwt, getAllConversations);
 
-router.get("/getOne", getConversation);
+router.get("/getOne", checkJwt, getConversation);
 
-router.patch("/message", createMessage);
+router.patch("/message", checkJwt, createMessage);
 
 export default router;

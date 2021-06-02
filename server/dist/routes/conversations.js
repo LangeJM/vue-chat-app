@@ -2,9 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const conversations_1 = require("../controllers/conversations");
+const auth_config_1 = require("../auth/auth_config");
 const router = express_1.Router();
-router.post("/", conversations_1.createConversation);
-router.get("/", conversations_1.getAllConversations);
-router.get("/getOne", conversations_1.getConversation);
-router.patch("/message", conversations_1.createMessage);
+router.post("/", auth_config_1.checkJwt, conversations_1.createConversation);
+router.get("/", auth_config_1.checkJwt, conversations_1.getAllConversations);
+router.get("/getOne", auth_config_1.checkJwt, conversations_1.getConversation);
+router.patch("/message", auth_config_1.checkJwt, conversations_1.createMessage);
 exports.default = router;

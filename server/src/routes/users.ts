@@ -7,14 +7,16 @@ import {
   getAllUsers,
 } from "../controllers/users";
 
+import { checkJwt } from "../auth/auth_config";
+
 const router = Router();
 
-router.post("/", createUser);
+router.post("/", checkJwt, createUser);
 
-router.get("/", getAllUsers);
+router.get("/", checkJwt, getAllUsers);
 
-router.get("/getOne", getUser);
+router.get("/getOne", checkJwt, getUser);
 
-router.patch("/", updateUser);
+router.patch("/", checkJwt, updateUser);
 
 export default router;

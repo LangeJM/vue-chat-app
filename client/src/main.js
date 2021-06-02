@@ -13,25 +13,24 @@ import {
   faPaperPlane
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { domain, clientId } from "./auth_config.json";
+import { domain, clientId, audience } from "../../auth_config.json";
+import AsyncComputed from "vue-async-computed";
 
 Vue.config.productionTip = false;
+
+Vue.use(AsyncComputed);
 
 Vue.use(
   new VueSocketIO({
     debug: true,
     connection: SocketIO("http://localhost:5000")
-    // vuex: {
-    //   store,
-    //   actionPrefix: "SOCKET_",
-    //   mutationPrefix: "SOCKET_"
-    // }
   })
 );
 
 Vue.use(Auth0Plugin, {
   domain,
   clientId,
+  audience,
   onRedirectCallback: appState => {
     router.push(
       appState && appState.targetUrl
