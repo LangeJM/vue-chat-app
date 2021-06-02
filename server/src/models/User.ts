@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema(
     socketID: {
       type: String,
       required: true,
-      default: "",
+      default: "initialized user",
     },
     isBlockedBy: [String],
     blocked: [String],

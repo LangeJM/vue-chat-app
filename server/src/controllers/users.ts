@@ -98,7 +98,10 @@ export const setUserOnline: Function = async (
         // If option new is set to true returns the updated document
         { new: true }
       );
-      console.log(`New status of user ${user.email} is` + " ONLINE".green);
+      console.log(
+        `New status of user ${user.email} with sockedID ${socketID} is` +
+          " ONLINE".green
+      );
     } else throw "No user information included";
   } catch (error) {
     console.log(error);

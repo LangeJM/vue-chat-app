@@ -7,9 +7,11 @@
         <router-view />
       </div>
     </div>
-    <footer class="bg-light text-center p-3 d-flex justify-content-center align-items-center">
+    <footer
+      class="bg-light text-center p-3 d-flex justify-content-center align-items-center"
+    >
       <p>
-        <span>Vue</span>View App on 
+        <span>Vue</span>View App on
         <a href="https://github.com/LangeJM/vue-chat-app">Github</a>
       </p>
     </footer>
@@ -23,37 +25,39 @@ import Error from "./components/Error";
 export default {
   components: {
     NavBar,
-    Error
+    Error,
   },
   async updated() {
-      this.$store.commit('setActiveUser', this.$auth.user)
-      // console.log(`Auth Email after update: ${this.$auth.user.email}`)
-      // console.log(`Active User email after update: ${this.$store.state.user.email}`)
-      // console.log(`Previous Active User email after update: ${this.$store.state.previousUser.email}`)
-      if (this.$store.state.user.email && this.$store.state.previousUser.email === undefined) {
-        try {
-          await fetch("http://localhost:5000/users", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({email: this.$store.state.user.email})
-          });
-          this.$store.dispatch("getUserList");
-          
-        } catch (error) {
-          console.log(error);
-        }
-      }     
+    this.$store.commit("setActiveUser", this.$auth.user);
+    // console.log(`Auth Email after update: ${this.$auth.user.email}`)
+    // console.log(`Active User email after update: ${this.$store.state.user.email}`)
+    // console.log(`Previous Active User email after update: ${this.$store.state.previousUser.email}`)
+    if (
+      this.$store.state.user.email &&
+      this.$store.state.previousUser.email === undefined
+    ) {
+      try {
+        await fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: this.$store.state.user.email }),
+        });
+        this.$store.dispatch("getUserList");
+      } catch (error) {
+        console.log(error);
+      }
+    }
   },
 };
 </script>
 
 <style scoped>
-  span {
-    text-decoration: line-through;
-  }
-  p {
-    margin: 0
-  }
+span {
+  text-decoration: line-through;
+}
+p {
+  margin: 0;
+}
 </style>
