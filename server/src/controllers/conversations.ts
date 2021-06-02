@@ -1,5 +1,4 @@
 import { RequestHandler } from "express";
-
 import { Message } from "../models/Message";
 import { Conversation } from "../models/Conversation";
 

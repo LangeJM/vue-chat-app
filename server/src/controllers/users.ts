@@ -1,5 +1,4 @@
 import { RequestHandler } from "express";
-
 import { User } from "../models/User";
 
 export const createUser: RequestHandler = async (req, res, next) => {
