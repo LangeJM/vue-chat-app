@@ -17,8 +17,8 @@
 <script>
 export default {
   name: "ChatComposer",
-  sockets: {
-    newMessage: function (data) {
+  created() {
+    this.$socket.on("newMessage", (data) => {
       if (
         data.author === this.$store.state.selectedUser.email &&
         data.recipient === this.$store.state.user.email
@@ -31,7 +31,7 @@ export default {
           accessToken: this.accessToken,
         });
       }
-    },
+    });
   },
   methods: {
     async onClick() {

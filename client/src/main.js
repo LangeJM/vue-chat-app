@@ -1,6 +1,5 @@
 import Vue from "vue";
 import SocketIO from "socket.io-client";
-import VueSocketIO from "vue-socket.io";
 import App from "./App.vue";
 import router from "./router";
 import { store } from "./store/store";
@@ -20,12 +19,8 @@ Vue.config.productionTip = false;
 
 Vue.use(AsyncComputed);
 
-Vue.use(
-  new VueSocketIO({
-    debug: true,
-    connection: SocketIO("http://localhost:5000")
-  })
-);
+const socket = SocketIO("http://localhost:5000");
+Vue.prototype.$socket = socket;
 
 Vue.use(Auth0Plugin, {
   domain,

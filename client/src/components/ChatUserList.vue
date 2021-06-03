@@ -67,10 +67,10 @@ export default {
       });
     },
   },
-  sockets: {
-    userStatusChange() {
+  created() {
+    this.$socket.on("userStatusChange", () => {
       this.$store.dispatch("getUserList", { accessToken: this.accessToken });
-    },
+    });
   },
 };
 </script>
