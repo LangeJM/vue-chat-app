@@ -5,12 +5,9 @@
 </template>
 
 <script>
-
 export default {
   name: "Analytics",
-  components: {
-    
-  }
+  components: {},
 };
 </script>
 

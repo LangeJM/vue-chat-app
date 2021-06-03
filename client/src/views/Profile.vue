@@ -12,8 +12,12 @@
         <h2>{{ $auth.user.name }}</h2>
         <p class="lead text-muted">{{ $auth.user.email }}</p>
 
-        <div v-for="(value, name) in $auth.user" :key="name" class="mx-3 mb-1 border-bottom">
-          {{`${name} : ${value}`}}
+        <div
+          v-for="(value, name) in $auth.user"
+          :key="name"
+          class="mx-3 mb-1 border-bottom"
+        >
+          {{ `${name} : ${value}` }}
         </div>
       </div>
     </div>

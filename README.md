@@ -32,11 +32,11 @@ As a general side note, when you install packages locally (and not globally) you
 
 ### Auth0
 
-The project needs to be configured with your Auth0 domain and client ID in order for the authentication flow to work.
+The project needs to be configured with your Auth0 domain, client ID and audience in order for the authentication flow to work.
 
 1. Go to [Auth0](https://auth0.com/signup) and click Sign Up.
 2. Use Google, GitHub or Microsoft Account to login.
-3. Add your auth0 details as shown in `example.auth_config.json` in the client directory and rename the file to `auth_config.json`. Make sure to .gitignore this file since it contains sensitive information.
+3. Add your auth0 details as shown in `example.auth_config.json` in the root directory and rename the file to `auth_config.json`. Make sure to .gitignore this file since it contains sensitive information.
 
 ### MongoDB
 

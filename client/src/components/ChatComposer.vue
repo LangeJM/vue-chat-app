@@ -17,15 +17,21 @@
 <script>
 export default {
   name: "ChatComposer",
-  sockets: {
-    newMessage: function (data) {
+  created() {
+    this.$socket.on("newMessage", (data) => {
       if (
         data.author === this.$store.state.selectedUser.email &&
         data.recipient === this.$store.state.user.email
       ) {
-        this.$store.dispatch("getConversation", [data.author, data.recipient]);
+        this.$store.dispatch("getConversation", {
+          subscribers: [
+            this.$store.state.user.email,
+            this.$store.state.selectedUser.email,
+          ],
+          accessToken: this.accessToken,
+        });
       }
-    },
+    });
   },
   methods: {
     async onClick() {
@@ -39,6 +45,7 @@ export default {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${this.accessToken}`,
           },
           body: JSON.stringify(requestBody),
           // body: subscribers
@@ -53,10 +60,13 @@ export default {
       this.$refs.textarea.style.height = "2.5rem";
       this.$store.commit("changeMessage", "");
       this.$socket.emit("newMessage", socketMessageObject);
-      this.$store.dispatch("getConversation", [
-        this.$store.state.user.email,
-        this.$store.state.selectedUser.email,
-      ]);
+      this.$store.dispatch("getConversation", {
+        subscribers: [
+          this.$store.state.user.email,
+          this.$store.state.selectedUser.email,
+        ],
+        accessToken: this.accessToken,
+      });
     },
     onChange(e) {
       // This is for training purposes only, there is no need to emit to parent. All can be handle here..
@@ -71,6 +81,11 @@ export default {
   computed: {
     message() {
       return this.$store.state.message;
+    },
+  },
+  asyncComputed: {
+    async accessToken() {
+      return await this.$auth.getTokenSilently();
     },
   },
 };

@@ -28,6 +28,7 @@ export default {
     Error,
   },
   async updated() {
+    const accessToken = await this.$auth.getTokenSilently();
     this.$store.commit("setActiveUser", this.$auth.user);
     // console.log(`Auth Email after update: ${this.$auth.user.email}`)
     // console.log(`Active User email after update: ${this.$store.state.user.email}`)
@@ -41,10 +42,11 @@ export default {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
           },
           body: JSON.stringify({ email: this.$store.state.user.email }),
         });
-        this.$store.dispatch("getUserList");
+        this.$store.dispatch("getUserList", { accessToken });
       } catch (error) {
         console.log(error);
       }

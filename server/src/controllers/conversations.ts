@@ -5,7 +5,7 @@ import { Conversation } from "../models/Conversation";
 export const createConversation: RequestHandler = async (req, res, next) => {
   try {
     const convoExists = await Conversation.find({
-      subscribers: { $all: req.body.subscribers },
+      subscribers: { $all: req.body },
     });
     if (convoExists.length) {
       res.status(202).json({

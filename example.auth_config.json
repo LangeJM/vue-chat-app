@@ -1,0 +1,5 @@
+{
+  "domain": "<someDomain>",
+  "clientId": "<someId>",
+  "audience": "https://<someDomain>/api/v2/"
+}

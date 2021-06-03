@@ -39,29 +39,33 @@ export const store = new Vuex.Store({
     }
   },
   actions: {
-    async getUserList({ commit }) {
+    async getUserList({ commit }, payload) {
       try {
-        const response = await fetch(apiBaseUrl + "/users");
+        const response = await fetch(apiBaseUrl + "/users", {
+          headers: {
+            Authorization: `Bearer ${payload.accessToken}`
+          }
+        });
         const data = await response.json();
         commit("setUserList", data.data);
       } catch (error) {
-        console.log(error);
+        console.log(`error for get userlist: ${error}`);
       }
     },
     async getConversation({ commit }, payload) {
-      let subscribers = { subscribers: payload };
       try {
         const response = await fetch(apiBaseUrl + "/conversations", {
           method: "POST",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${payload.accessToken}`
           },
-          body: JSON.stringify(subscribers)
+          body: JSON.stringify(payload.subscribers)
         });
         const data = await response.json();
         commit("setActiveConversation", data.data[0]);
       } catch (error) {
-        console.log(error);
+        console.log(`error for get conversation: ${error}`);
       }
     }
   }

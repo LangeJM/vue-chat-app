@@ -7,12 +7,14 @@ import { connectDB } from "./db/db";
 import colors from "colors";
 import { Socket } from "socket.io";
 import { setUserOnline, setUserOffline } from "./controllers/users";
+// import helmet from "helmet";
 
 dotenv.config();
 connectDB();
 colors.enable();
 
 const app = express();
+// app.use(helmet());
 
 app.use(cors());
 

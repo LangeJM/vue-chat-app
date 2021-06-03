@@ -44,22 +44,33 @@ export default {
       return this.$store.state.selectedUser;
     },
   },
-  mounted() {
-    this.$store.dispatch("getUserList");
+  asyncComputed: {
+    async accessToken() {
+      return await this.$auth.getTokenSilently();
+    },
+  },
+  updated() {
+    if (!this.$store.state.userList) {
+      this.$store.dispatch("getUserList", { accessToken: this.accessToken });
+    }
   },
   methods: {
     selectUser(user) {
+      console.log(this.$store.state.user.email);
       this.$store.commit("selectUser", user);
-      this.$store.dispatch("getConversation", [
-        this.$store.state.user.email,
-        user.email,
-      ]);
+      this.$store.dispatch("getConversation", {
+        subscribers: [
+          this.$store.state.user.email,
+          this.$store.state.selectedUser.email,
+        ],
+        accessToken: this.accessToken,
+      });
     },
   },
-  sockets: {
-    userStatusChange() {
-      this.$store.dispatch("getUserList");
-    },
+  created() {
+    this.$socket.on("userStatusChange", () => {
+      this.$store.dispatch("getUserList", { accessToken: this.accessToken });
+    });
   },
 };
 </script>
